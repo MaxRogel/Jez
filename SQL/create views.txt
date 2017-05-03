@@ -1,0 +1,21 @@
+SELECT vAreas.Area_ID, vAreas.YYYY, vAreas.AreaName, Loci.Locus_ID, Loci.Locus_no, Loci.Square, Loci.Date_opened, Loci.Date_closed, Loci.Open_Level, Loci.Close_Level, Loci.Locus_Above, Loci.Locus_Below, Loci.Locus_CoExisting, Loci.Description, Loci.Deposit_description, Loci.Registration_notes, Loci.Clean
+FROM vAreas INNER JOIN Loci ON vAreas.Area_ID = Loci.Area_ID
+ORDER BY vAreas.YYYY, vAreas.AreaName, Loci.Locus_no;
+
+
+CREATE VIEW v_loci AS
+SELECT vAreas.Area_ID, vAreas.YYYY, vAreas.AreaName, Loci.Locus_ID, Loci.Locus_no, Loci.Square, Loci.Date_opened, Loci.Date_closed, Loci.Open_Level, Loci.Close_Level, Loci.Locus_Above, Loci.Locus_Below, Loci.Loci_Coexisting, Loci.Description, Loci.Deposit_description, Loci.Registration_notes, Loci.Clean
+FROM vAreas INNER JOIN Loci ON vAreas.Area_ID = Loci.Area_ID
+ORDER BY vAreas.YYYY, vAreas.AreaName, Loci.Locus_no;
+
+
+
+CREATE VIEW v_areas AS
+SELECT Area_ID, YYYY, Area AS AreaName, Description, Staff FROM areas ORDER BY YYYY, AreaName ASC
+
+
+
+CREATE VIEW v_lb AS
+SELECT lb.Locus_ID AS Locus_ID, lb.LB_no, lb.Related_PT_no, lb.Square, lb.LB_date, lb.Quantity, lb.Description, lb.Notes, lu_find_categories.Category_Name
+FROM lb INNER JOIN lu_find_categories ON lb.Category_ID = lu_find_categories.Category_ID 
+ORDER BY lb.LB_no;

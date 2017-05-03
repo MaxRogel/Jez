@@ -1,0 +1,3 @@
+SELECT v_areas.Area_ID, v_areas.YYYY, v_areas.AreaName, Loci.Locus_ID, Loci.Locus_no, Loci.Square, Loci.Date_opened, Loci.Date_closed, Loci.Open_Level, Loci.Close_Level, Loci.Locus_Above, Loci.Locus_Below, Loci.Locus_CoExisting, Loci.Description, Loci.Deposit_description, Loci.Registration_notes, Loci.Clean
+FROM v_areas INNER JOIN Loci ON v_areas.Area_ID = Loci.Area_ID
+ORDER BY v_areas.YYYY, v_areas.AreaName, Loci.Locus_no;
