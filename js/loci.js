@@ -216,21 +216,7 @@ function displayLocusInfo(data) {
 		trHTML += '</table>';		
 	}	
 	
-	if(gsCnt > 0) {
-		gs=data["gs"];
-	
-		trHTML += '<table style="width:100%" class="GS-table">';	
-		trHTML += '<tr><th>GS</th><th>R/T pt</th><th>No. of pieces</th><th>Description</th><th>Notes</th><th>Date</th></tr>';
-	
-		$.each(gs, function(index, rec) {
-			
-		trHTML += '<tr>';
-		trHTML += '<td>' + rec.GS_no + '</td><td>' + rec.Related_PT_no + '</td><td>' + rec.No_of_pieces + '</td><td>' +  FormatString(rec.Description)+ '</td><td>' + FormatString(rec.Notes) + '</td><td>' + FormatDate(rec.GS_date) + '</td>';  
-		trHTML += '</tr>';
-		});
-		
-		trHTML += '</table>';		
-	}		
+
 	
 	$("#msg").html(trHTML);
 
@@ -262,7 +248,6 @@ function FormatDate(raw_date) {
 	
     if(raw_date != null)
 	{
-
     	formatted_date = raw_date.substring(0, 10);
 	}
     else

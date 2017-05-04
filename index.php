@@ -54,6 +54,137 @@ if (isset($_POST['username'])) {
 	//include("login.php");
 ?>
 
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    
+<style>
+
+.main{
+    margin-top: 150px;
+}
+
+.main-content {
+/*    background-color:#009edf;*/
+    border: 2px solid #009edf;
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 20px 40px;
+    color: #ccc;
+    text-shadow: none;
+
+}
+
+
+.input-group{
+	margin: 20px 0px;
+}
+.input-group-addon {
+    color: #009edf ;
+    font-size: 17px;
+}
+.login-button{
+    margin: 0px auto;
+    max-width: 200px;;
+    
+}
+
+
+.form-header{
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #009edf;
+    color: #fff;
+    width: 100% ;
+    padding: 20px 0px;
+    border-top-right-radius:10px ;
+    border-top-left-radius:10px 
+}
+.remember{
+    color: black;
+}
+
+body {
+    height: 100%;
+}
+
+body {
+    background: url("images/sq.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+</style>    
+    
+  </head>
+  <body>
+
+
+	<section class="login-info">
+	<div class="container">
+	
+	<form name="form-login" class="form-login" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+		<div class="message"><?php if($message!="") { echo $message; } ?></div>
+		<br>
+	
+	  <div class="row main">
+	       <div class="form-header">
+	          <h1 class="text-center ">Please login to access DB</h1>
+	        </div>
+	    <div class="main-content">
+
+
+	            
+	          <div class="input-group ">
+	            <span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+	            <input id="email" type="text" class="form-control" name="username" placeholder="Enter user name">
+	          </div>
+	          
+	          <div class="input-group">
+	            <span class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+	            <input id="password" type="password" class="form-control" name="password" placeholder="Enter your Password">
+	          </div>
+	          
+	          <div class="form-group ">
+				  <input type="submit" class="btn btn-danger center-block login-button" value="submit">	              
+	          </div>
+	      </div>
+	    </div>
+	    </form>
+	</div>
+	</section>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+
+
+
+<!---
 <html>
 <head>
 	<title>Jez DB User Login</title>
@@ -89,3 +220,4 @@ if (isset($_POST['username'])) {
 	</div>
 </body>
 </html>
+-->
