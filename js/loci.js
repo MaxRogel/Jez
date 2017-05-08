@@ -3,6 +3,14 @@ var lc;
 var gLocId
 
 $(document).ready(function(){
+
+	//populate area list from $areas. This list was populated in loci.php 
+
+	
+	
+	 $(".dropdown-menu li a").click(function(){
+            $("#areas_dropdown").text($(this).text());
+    });
 	
 	//attach click handler to nav buttons
 	$(".Btn").click(function(){

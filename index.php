@@ -42,7 +42,7 @@ if (isset($_POST['username'])) {
 				//echo $key." ".$val."<br/>";
 				header("Location: loci.php");	
 			} else {
-				$message = 'Wrong password Please try again'; 			
+				$message = 'Wrong password! Try again'; 			
 			}
 		}	
 	}
@@ -61,7 +61,7 @@ if (isset($_POST['username'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Jezreel DB</title>
 
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -81,7 +81,8 @@ if (isset($_POST['username'])) {
 }
 
 .main-content {
-/*    background-color:#009edf;*/
+   /*background-color: Silver;
+   opacity: 0.5;*/
     border: 2px solid #009edf;
     margin: 0 auto;
     max-width: 500px;
@@ -91,6 +92,11 @@ if (isset($_POST['username'])) {
 
 }
 
+.message {
+font-weight: bold;
+text-align: center;
+width: 100%;
+}
 
 .input-group{
 	margin: 20px 0px;
@@ -142,15 +148,17 @@ body {
 	<div class="container">
 	
 	<form name="form-login" class="form-login" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-		<div class="message"><?php if($message!="") { echo $message; } ?></div>
-		<br>
 	
-	  <div class="row main">
+		
+	
+	    <div class="row main">
 	       <div class="form-header">
 	          <h1 class="text-center ">Please login to access DB</h1>
 	        </div>
 	    <div class="main-content">
-
+				
+				<div class="message text-white"><h2><?php if($message!="") { echo $message; } ?></h2></div>
+		<br>
 
 	            
 	          <div class="input-group ">
@@ -160,7 +168,7 @@ body {
 	          
 	          <div class="input-group">
 	            <span class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
-	            <input id="password" type="password" class="form-control" name="password" placeholder="Enter your Password">
+	            <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password">
 	          </div>
 	          
 	          <div class="form-group ">

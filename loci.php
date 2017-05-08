@@ -7,7 +7,7 @@ if(!isset($_SESSION['user_id'])) {
 }
 require_once 'config.php';
 
-//populate areas combobox
+//populate $areas list
 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $con_name, $con_pw);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
@@ -22,13 +22,22 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $con_name, $con_pw);
 ?>
 
 
-<html>
+<html lang="en">
+
 <head>
 	<TITLE>Jez Loci</TITLE>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="./js/loci.js"></script>
+	
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+  <script src="./js/loci.js"></script>	
 
 	<style>
+	
 	</style>	
 	
 	<link rel="stylesheet" type="text/css" href="css/jez.css" />
@@ -37,7 +46,16 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $con_name, $con_pw);
 </head>
 
 <body>
+
+
+
+
 	<div class="body-wrappper">
+	
+	
+	
+	
+	
 	<div id="header">
 		<?php include("header.inc.php"); ?>
 	</div>
@@ -45,6 +63,7 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $con_name, $con_pw);
 	<div class="nav_top">
 		<?php include("nav-top.inc.php"); ?>
 	</div>
+
 	
 	<div class=main-wrapper>
 		
@@ -64,5 +83,8 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $con_name, $con_pw);
 		<?php include("footer.inc.php"); ?>
 	</div>
 	</div>	
+
+
+	
 </body>
 </html>
