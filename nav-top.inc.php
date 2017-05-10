@@ -8,23 +8,30 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><p class="navbar-text">Locus Navigator</p></li>
-					<li><a href="#">First</a></li>
-					<li><a href="#">Prev</a></li>
-					<li><a href="#">Next</a></li>
-					<li><a href="#">Last</a></li>
+					<li><a href="#" class="arrow-nav" id="bFirst">First</a></li>
+					<li><a href="#" class="arrow-nav" id="bPrev">Prev</a></li>
+					<li><a href="#" class="arrow-nav" id="bNext">Next</a></li>
+					<li><a href="#" class="arrow-nav" id="bLast">Last</a></li>
 					<!--  <li><p class="navbar-text">| Area:</p></li>-->
 					<li class="dropdown" >
-					<a href="#" class="dropdown-toggle" id="areas_dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Area<span class="caret"></span></a>
-						<ul class="dropdown-menu" >
-						<?php foreach ( $areas as $a ) { ?> <li><a href="#" id="<?php echo $a["Area_ID"]; ?>"> <?php echo $a["YYYY"]. '.'. $a["AreaName"]; ?></a></li> 	<?php } ?>	
+					<a href="#" class="dropdown-toggle" id="areas_dropdown_toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Area<span class="caret"></span></a>
+						<ul class="dropdown-menu  area_dropdown">
+						<?php foreach ( $areas as $a ) { ?>
+							<li><a href="#"><?php echo $a["YYYY"] . '.' . $a["AreaName"]; ?></a></li>
+						<?php } ?>			
 						</ul>
 					</li>
 						
-					<!-- <li><p class="navbar-text">Locus:</p></li> -->
-					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Locus<span class="caret"></span></a>
-						<ul class="dropdown-menu">
+					<li class="dropdown">
+					<a href="#" class="dropdown-toggle"  id="loci_dropdown_toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Locus<span class="caret"></span></a>
+						<ul class="dropdown-menu loci_dropdown" id="loci_list">
 						</ul></li>
-					<li><a href="#">GO!</a></li>						
+					<li><a href="#" class="arrow-nav" id="bGo">GO!</a></li>
+					
+					
+					
+		
+     				
 				</ul>
 				
 				
@@ -52,11 +59,11 @@
 
 
 
-
+<!--  
  <a href="loci.php"><strong>Home</strong></a>
 <a href="loci.php"><strong>Loci</strong></a>
 <a href="loci.php"><strong>Walls</strong></a>
 <a href="logout.php"><strong>Logout</strong></a>
- 
+--> 
 
   

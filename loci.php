@@ -67,11 +67,7 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $con_name, $con_pw);
 	
 	<div class=main-wrapper>
 		
-		<div class=main-nav>
-			<!--loci navigation and display options-->
-			<?php include("loci-nav.php"); ?>
-		</div>
-		
+
 		
 		<div class=main-content>
 			<!--loci main content (locus form and find tables)-->			
@@ -82,7 +78,7 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $con_name, $con_pw);
 	<div id="footer">
 		<?php include("footer.inc.php"); ?>
 	</div>
-	</div>	
+
 
 
 	

@@ -1,16 +1,26 @@
 
 var lc;
-var gLocId
+var gLocId;
+
 
 $(document).ready(function(){
 
-	//populate area list from $areas. This list was populated in loci.php 
+	//dropdown area selection. This list was populated in loci.php 	
 
-	
-	
-	 $(".dropdown-menu li a").click(function(){
-            $("#areas_dropdown").text($(this).text());
+	 $(".area_dropdown li a").click(function(){	 
+		 	
+		//show selected area                   
+		$("#areas_dropdown_toggle").html($(this).text()+' <span class="caret"></span>');
+		
+		//clear loci list
+		$('.loci_dropdown').children().remove(); 
+		$("#loci_dropdown_toggle").html("Locus" +' <span class="caret"></span>');
+		
+		//populate loci dropdown
+		getLocusListBS($(this).text());
+    
     });
+
 	
 	//attach click handler to nav buttons
 	$(".Btn").click(function(){
@@ -51,7 +61,49 @@ $(document).ready(function(){
 		});
 	});
  
- $('#btnFirst').trigger('click');
+	//attach click handler to loci navigation buttons
+	$(".arrow-nav").click(function(){
+		var area, area_name, yyyy, loc_id, loc_no, area_id;
+		var req = $(this).attr('id');
+		
+		
+		//alert("loc is "+ $("#loci-list").val()+ " req is "+ $(this).attr('id'));
+		if(req == "bGo") {
+			if(loc_id == ""){
+				return;
+			}else {
+				//on GO - send loc_no and area_id
+				loc_no = parseInt($("#loci_dropdown_toggle").text());
+				area = $("#areas_dropdown_toggle").text()
+				yyyy = area.split('.')[0];
+				area_name = area.split('.')[1];	
+				//alert("GO loc: " + loc_no + " yyyy: " + yyyy + " area_name: " + area_name);
+			}
+		} else 
+		{
+			//if not GO then we used the global gLocId
+			loc_id = gLocId;
+		}
+		//alert("before ajax req: " + req + " loc_id: " + loc_id + " loc no: "+ loc_no + " yyyy: " + yyyy + " area_name: " + area_name);
+		//alert("sending loc_id: " + loc_id + " loc_no: " + loc_no + " area_id: " + area_id);
+		
+		$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "get_locus_info_bs.php",
+		data: 'loc_id=' + loc_id + '&req='+ req + '&loc_no=' + loc_no + '&yyyy='+ yyyy + '&area_name='+ area_name,
+		error: function(xhr, error)
+		{
+			alert("ajax error");
+		},
+		success: function(data){	
+			displayLocusInfo(data);
+		}
+		
+		});
+	});
+	
+ $('#bFirst').trigger('click');
  
  });
 
@@ -68,9 +120,47 @@ function getLocusList(val) {
 	});
 }
 
+function getLocusListBS(val) {
+
+	YYYY = val.split('.')[0];
+	area_name = val.split('.')[1];	
+	//alert("getLocusListBS year: " + YYYY + ' name: ' + area_name);
+	
+	$.ajax({
+	type: "POST",
+	url: "get_loci_list.php",
+	data:'YYYY=' + YYYY + '&area_name=' + area_name,
+	success: function(data){
+
+		$('.loci_dropdown').children().remove(); 
+		
+		$.each(JSON.parse(data), function(index, rec) {			
+			$('#loci_list').append("<li><a href='#'>" + rec.Locus_no + "</a></li>");	
+		});				
+	}	
+	});
+
+	
+	//attach click handler
+	$(document).on('click', '.loci_dropdown li a', function(){
+		//alert("loci click");
+		
+		
+		                  
+		$("#loci_dropdown_toggle").html($(this).text () +' <span class="caret"></span>');
+		    
+
+		
+		
+	    /* your code */
+	});
+	
+	
+}
 function displayLocusInfo(data) {
 	lc = data;
 	gLocId = data["loc"].Locus_ID;
+	gAreaID = data["loc"].Area_ID;
 	//alert("loc id is "+ gLocId);	
 	loc= data["loc"];	
 //$("#msg").html(data["json"]);	
