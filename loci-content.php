@@ -2,10 +2,11 @@
 
 
 <div class=loci-content>
+	
 	<form id="locus-form">
 
 		<!--<legend>Locus Details:</legend><br> -->
-
+<!--  
 		<div class="col">
 			<label for="locusName">Locus:</label>
 			<input type="text" name="locusName" id="locusName">
@@ -58,13 +59,13 @@
 		<input type="text" name="find_summary" id="find_summary">	
 		
 																	
-		</div>
+		</div>-->
 	</form>
 
 
 	<p class="find-tables" id="locName"></p>
-	<div class="find-tables" id="msg">Messages from server here</div>
+	<!--  <div class="find-tables" id="msg">Messages from server here</div>-->
 	
-	<br><br>
+
 	<div class="images-space" id="images-space">Images from server here</div>	
 </div>	

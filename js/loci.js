@@ -21,45 +21,7 @@ $(document).ready(function(){
     
     });
 
-	
-	//attach click handler to nav buttons
-	$(".Btn").click(function(){
-		var loc_id, loc_no, area_id;
-		var req = $(this).attr('id');
-		
-		
-		//alert("loc is "+ $("#loci-list").val()+ " req is "+ $(this).attr('id'));
-		if(req == "btnGo") {
-			if(loc_id == ""){
-				return;
-			}else {
-				//on GO - send loc_no and area_id
-				loc_no = parseInt($("#loci-list option:selected").text());				
-				area_id =  $("#area-list").val();
-			}
-		} else 
-		{
-			//if not GO then we used the global gLocId
-			loc_id = gLocId;
-		}
-		
-		//alert("sending loc_id: " + loc_id + " loc_no: " + loc_no + " area_id: " + area_id);
-		
-		$.ajax({
-		type: "POST",
-		dataType: "json",
-		url: "get_locus_info.php",
-		data: 'loc_id=' + loc_id + '&req='+ req + '&loc_no=' + loc_no + '&area_id='+ area_id,
-		error: function(xhr, error)
-		{
-			alert("ajax error");
-		},
-		success: function(data){	
-			displayLocusInfo(data);
-		}
-		
-		});
-	});
+
  
 	//attach click handler to loci navigation buttons
 	$(".arrow-nav").click(function(){
@@ -85,7 +47,6 @@ $(document).ready(function(){
 			loc_id = gLocId;
 		}
 		//alert("before ajax req: " + req + " loc_id: " + loc_id + " loc no: "+ loc_no + " yyyy: " + yyyy + " area_name: " + area_name);
-		//alert("sending loc_id: " + loc_id + " loc_no: " + loc_no + " area_id: " + area_id);
 		
 		$.ajax({
 		type: "POST",
@@ -107,18 +68,6 @@ $(document).ready(function(){
  
  });
 
-//Here and NOT in doc.ready (2 hours to realize this)
-function getLocusList(val) {
-	$.ajax({
-	type: "POST",
-	url: "get_loci_per_area.php",
-	data:'area_id='+val,
-	success: function(data){
-		//populate loci-list according to area chosen
-		$("#loci-list").html(data);
-	}
-	});
-}
 
 function getLocusListBS(val) {
 
@@ -150,9 +99,7 @@ function getLocusListBS(val) {
 		$("#loci_dropdown_toggle").html($(this).text () +' <span class="caret"></span>');
 		    
 
-		
-		
-	    /* your code */
+
 	});
 	
 	
@@ -169,7 +116,7 @@ function displayLocusInfo(data) {
 
 	$("#locusID").val(loc.Locus_ID);
 	$("#locusName").val($locName);
-	
+	$("#locus_name").val($locName);
 	
 	$("#date_opened").val(FormatDate(loc.Date_opened));
 	$("#date_closed").val(FormatDate(loc.Date_closed));
@@ -177,14 +124,21 @@ function displayLocusInfo(data) {
 	$("#square").val(loc.Square);
 	$("#level_open").val(FormatString(loc.Open_Level));
 	$("#level_closed").val(loc.Close_Level);
+	
 	$("#loc_above").val(loc.Locus_Above);
 	$("#loc_below").val(loc.Locus_Below);
 	$("#co_exist").val(loc.Locus_CoExisting);
-
+	
+	$("#above").val(loc.Locus_Above);
+	$("#below").val(loc.Locus_Below);
+	$("#co_existing").val(loc.Locus_CoExisting);
+	
+	
 	$("#find_summary").val('PT(' + data.ptCnt + ') AR(' + data.arCnt + ') LB(' + data.lbCnt + ') FL(' + data.flCnt + ') GS('+ data.gsCnt + ') Images('+ data.imCnt + ')');
 
 	$("#description").val(FormatString(loc.Description));
 	$("#deposit").val(FormatString(loc.Deposit_description));
+	$("#notes").val(FormatString(loc.Deposit_description));
 	$("#registration").val(FormatString(loc.Registration_notes));
 
 	if(!$("#description").val())
@@ -199,16 +153,17 @@ function displayLocusInfo(data) {
 	}
 	
 	
-	if(!$("#deposit").val())
+
+	if(!$("#notes").val())
 	{
-		$("#deposit").hide();
-		$('label[for=deposit], input#deposit').hide();
+		$("#notes").hide();
+		$('label[for=notes], input#notes').hide();
 	}
 	else
 	{	
-		$("#deposit").show();
-		$('label[for=deposit], input#deposit').show();
-	}
+		$("#notes").show();
+		$('label[for=notes], input#notes').show();
+	}	
 	
 	if(!$("#registration").val())
 	{
@@ -229,9 +184,19 @@ function displayLocusInfo(data) {
 	flCnt=data["flCnt"];
 	gsCnt=data["gsCnt"];
 	imCnt=data["imCnt"];
+
+	$('#pt_table td').remove();
+	$('#ar_table td').remove();
+	$('#lb_table td').remove();	
+	$('#gs_table td').remove();	
+	$('#fl_table td').remove();	
 	
 	if(ptCnt > 0) {
+		$('#pt_table').show();		
 		pt=data["pt"];
+		
+		var pt_row;
+		
 		
 		trHTML = '<table style="width:100%" class="PT-table">';
 		trHTML += '<tr><th>PT</th><th>Keep</th><th>Periods</th><th>Description</th><th>Notes</th><th>date</th><th>Lvl tp</th><th>Lvl bt</th></tr>';
@@ -241,16 +206,30 @@ function displayLocusInfo(data) {
 			trHTML += '<tr>';
 			trHTML += '<td>' + rec.PT_no + '</td><td>' + rec.Keep + '</td><td>' + FormatString(rec.Pd_text) + '</td><td>' + FormatString(rec.Description) + '</td><td>' + FormatString(rec.Notes) + '</td><td>' + FormatDate(rec.PT_date) + '</td><td>' + FormatString(rec.Top_Lv) + '</td><td>' + FormatString(rec.Bot_Lv) + '</td>';  
 		   trHTML += '</tr>';
+		   
+		 pt_row += '<tr>';
+		 pt_row += '<td>' + rec.PT_no + '</td><td>' + rec.Keep + '</td><td>' + FormatString(rec.Pd_text) + '</td><td>' + FormatString(rec.Description) + '</td><td>' + FormatString(rec.Notes) + '</td><td>' + FormatDate(rec.PT_date) + '</td><td>' + FormatString(rec.Top_Lv) + '</td><td>' + FormatString(rec.Bot_Lv) + '</td>';  
+		 pt_row += '</tr>';  
+		   
+		   
+		   
 		});
 	
 		trHTML += '</table>';
-
+		pt_row += '</table>';
+		
+		 $('#pt_table').append(pt_row);
 	}
+	else
+		$('#pt_table').show();		
 	
 	
 	if(arCnt > 0) {
+		$('#ar_table').show();		
 		ar=data["ar"];
-	
+
+		var ar_row;
+		
 		trHTML += '<table style="width:100%" class="AR-table">';	
 		trHTML += '<tr><th>AR</th><th>R/T pt</th><th>Description</th><th>Category</th><th>Notes</th><th>date</th><th>Level</th></tr>';
 	
@@ -259,16 +238,29 @@ function displayLocusInfo(data) {
 		trHTML += '<tr>';
 		trHTML += '<td>' + rec.AR_no + '</td><td>' + rec.Related_PT_no + '</td><td>' + FormatString(rec.Description) + '</td><td>' + FormatString(rec.Category_Name) + '</td><td>' + FormatString(rec.Notes) + '</td><td>' + FormatDate(rec.Date) + '</td><td>' + FormatString(rec.Level) + '</td>';  
 		trHTML += '</tr>';
+		
+		
+		ar_row += '<tr>';
+		ar_row += '<td>' + rec.AR_no + '</td><td>' + rec.Related_PT_no + '</td><td>' + FormatString(rec.Description) + '</td><td>' + FormatString(rec.Category_Name) + '</td><td>' + FormatString(rec.Notes) + '</td><td>' + FormatDate(rec.Date) + '</td><td>' + FormatString(rec.Level) + '</td>';  
+		ar_row += '</tr>';		
+		
 		});
 		
-		trHTML += '</table>';		
+		trHTML += '</table>';
+		ar_row += '</table>';	
+		
+		$('#ar_table').append(ar_row);
 	}
-	
+	else
+		$('#ar_table').hide();	
 
 	
 	if(lbCnt > 0) {
+		$('#lb_table').show();	
 		lb=data["lb"];
-	
+		var lb_row;
+
+		
 		trHTML += '<table style="width:100%" class="LB-table">';	
 		trHTML += '<tr><th>LB</th><th>R/T pt</th><th>Description</th><th>Category</th><th>Quantity</th><th>Notes</th><th>Date</th></tr>';
 	
@@ -277,14 +269,26 @@ function displayLocusInfo(data) {
 		trHTML += '<tr>';
 		trHTML += '<td>' + rec.LB_no + '</td><td>' + rec.Related_PT_no + '</td><td>' + FormatString(rec.Description) + '</td><td>' + FormatString(rec.Category_Name) + '</td><td>' + FormatString(rec.Quantity) + '</td><td>' + FormatString(rec.Notes) + '</td><td>' + FormatDate(rec.LB_date) + '</td>';  
 		trHTML += '</tr>';
+		
+		lb_row += '<tr>';
+		lb_row += '<td>' + rec.LB_no + '</td><td>' + rec.Related_PT_no + '</td><td>' + FormatString(rec.Description) + '</td><td>' + FormatString(rec.Category_Name) + '</td><td>' + FormatString(rec.Quantity) + '</td><td>' + FormatString(rec.Notes) + '</td><td>' + FormatDate(rec.LB_date) + '</td>';  
+		lb_row += '</tr>';		
+		
 		});
 		
-		trHTML += '</table>';		
+		trHTML += '</table>';
+		lb_row += '</table>';
+		
+		$('#lb_table').append(lb_row);
 	}
+	else
+		$('#lb_table').hide();	
 	
 	if(flCnt > 0) {
+		$('#fl_table').show();
 		fl=data["fl"];
-	
+		var fl_row;
+		
 		trHTML += '<table style="width:100%" class="FL-table">';	
 		trHTML += '<tr><th>FL</th><th>R/T pt</th><th>Weight</th><th>Description</th><th>Notes</th><th>Date</th></tr>';
 	
@@ -293,14 +297,29 @@ function displayLocusInfo(data) {
 		trHTML += '<tr>';
 		trHTML += '<td>' + rec.FL_no + '</td><td>' + rec.Related_PT_no + '</td><td>' + rec.Wt_grams + '</td><td>' +  FormatString(rec.Description)+ '</td><td>' + FormatString(rec.Notes) + '</td><td>' + FormatDate(rec.FL_date) + '</td>';  
 		trHTML += '</tr>';
+		
+		fl_row += '<tr>';
+		fl_row += '<td>' + rec.FL_no + '</td><td>' + rec.Related_PT_no + '</td><td>' + rec.Wt_grams + '</td><td>' +  FormatString(rec.Description)+ '</td><td>' + FormatString(rec.Notes) + '</td><td>' + FormatDate(rec.FL_date) + '</td>';  
+		fl_row += '</tr>';		
+		
+		
 		});
 		
-		trHTML += '</table>';		
+		trHTML += '</table>';	
+		
+		fl_row += '</table>';
+		
+		$('#fl_table').append(fl_row);
 	}	
+	else
+		$('#fl_table').hide();
 
 	if(gsCnt > 0) {
+		$('#gs_table').show();
 		gs=data["gs"];
-	
+		var gs_row;
+		
+		
 		trHTML += '<table style="width:100%" class="GS-table">';	
 		trHTML += '<tr><th>GS</th><th>R/T pt</th><th>No. of pieces</th><th>Description</th><th>Notes</th><th>Date</th></tr>';
 	
@@ -309,10 +328,20 @@ function displayLocusInfo(data) {
 		trHTML += '<tr>';
 		trHTML += '<td>' + rec.GS_no + '</td><td>' + rec.Related_PT_no + '</td><td>' + rec.No_of_pieces + '</td><td>' +  FormatString(rec.Description)+ '</td><td>' + FormatString(rec.Notes) + '</td><td>' + FormatDate(rec.GS_date) + '</td>';  
 		trHTML += '</tr>';
+		
+		gs_row += '<tr>';
+		gs_row += '<td>' + rec.GS_no + '</td><td>' + rec.Related_PT_no + '</td><td>' + rec.No_of_pieces + '</td><td>' +  FormatString(rec.Description)+ '</td><td>' + FormatString(rec.Notes) + '</td><td>' + FormatDate(rec.GS_date) + '</td>';  
+		gs_row += '</tr>';				
+		
 		});
 		
-		trHTML += '</table>';		
-	}	
+		trHTML += '</table>';
+		gs_row += '</table>';
+		
+		$('#gs_table').append(gs_row);		
+	}
+	else
+		$('#gs_table').hide();	
 	
 
 	
