@@ -349,7 +349,7 @@ function displayLocusInfo(data) {
 
 	//Images
 	$('#images-space').empty();	
-	
+	$('#image_row_1').empty();
 	if(imCnt > 0) {
 		
 		im=data["im"];
@@ -357,7 +357,13 @@ function displayLocusInfo(data) {
 
 		
 		$.each(im, function(index, rec) {
-			$('#images-space').prepend($('<img>',{id: rec.Image_no, src: 'JZ13\\' + rec.Image_file_name + '.' + rec.File_type, width: '250px'}))	
+			//$('#images-space').prepend($('<img>',{id: rec.Image_no, src: 'JZ_IMG_TN\\' + rec.Image_file_name + '.' + rec.File_type, width: '250px'}))
+			
+			
+			imHtml = '<div class="col-lg-2"><a title="Image 1" href="JZ_IMG_FULL\\' + rec.Image_file_name + '" data-title="1st title" data-lightbox="finds-lightbox"> <img src="JZ_IMG_TN\\' + rec.Image_file_name + '" width="200px" class="img-thumbnail"></a></div>';
+			$('#image_row_1').prepend(imHtml);
+			
+			
 		});
 
 	}		

@@ -31,13 +31,25 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $con_name, $con_pw);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="./css/lightbox.css" rel="stylesheet">  
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-  <script src="./js/loci.js"></script>	
+  <script src="./js/lightbox.js"></script>	
+  
 
-	<style>
+  
+  
+  <script src="./js/loci.js"></script>
+
+<script>
+lightbox.option({
+      'maxHeight': 800,
+
+    })  
+    </script>
+
+<style>
 
 
 
@@ -331,7 +343,7 @@ body {
 			<tr>
 				<th data-field="FL_no" class="col-lg-1">FL</th>
 				<th data-field="Related_PT_no" class="col-lg-1">R/T PT</th>
-				<th data-field="Wt_grams" class="col-lg-1">Wt(milligrams)</th>
+				<th data-field="Wt_grams" class="col-lg-1">Wt(mg)</th>
 				<th data-field="Description" class="col-lg-3">Description</th>
 				<th data-field="Notes" class="col-lg-2">Notes</th>
 				<th data-field="FL_date" class="col-lg-1">Date</th>				
@@ -353,20 +365,40 @@ body {
 	</table>
 	<br><br>
 
+	<div class="container">
+
+		<div class="row" id="image_row_1">
+		
+			<div class="col-lg-2">
+				<a title="Image 1" href="JZ_IMG_FULL//2013.S.L001.AR004_IM001.jpg" data-title="1st title" data-lightbox="finds-lightbox">
+				 <img src="JZ_IMG_TN//2013.S.L001.AR004_IM001.jpg" width="200px" class="img-thumbnail">
+				</a>
+			</div>
+			
+			<div class="col-lg-2">
+					<a title="Image 1" href="JZ_IMG_FULL//2013.S.L001.AR004_IM002.jpg" data-title="2st title" data-lightbox="finds-lightbox">
+					 <img src="JZ_IMG_TN//2013.S.L001.AR004_IM002.jpg" width="200px" class="img-thumbnail">
+					</a>
+				</div>			
+				
+			<div class="col-lg-2">
+					<a title="Image 1" href="JZ_IMG_FULL//2013.S.L001.PT001_IM001.jpg" data-title="3st title" data-lightbox="finds-lightbox">
+					 <img src="JZ_IMG_TN//2013.S.L001.PT001_IM001.jpg" width="200px" class="img-thumbnail">
+					</a>
+				</div>			
+				
+			<div class="row">
+				<div class="col-lg-2">
+					<a title="Image 1" href="JZ_IMG_FULL//2013.S.L001.PT001_IM002.jpg" data-title="4st title" data-lightbox="finds-lightbox">
+					 <img src="JZ_IMG_TN//2013.S.L001.PT001_IM002.jpg" width="200px" class="img-thumbnail">
+					</a>
+				</div>
+				</div>
+			
+			</div>
 
 		
-
-		
-		<div class=main-content>
-			<!--loci main content (locus form and find tables)-->			
-			<?php include("loci-content.php"); ?>
-		</div>	
-	
-
-	<div id="footer">
-		<?php include("footer.inc.php"); ?>
-	</div>
-
+		</div>
 
 
 	
