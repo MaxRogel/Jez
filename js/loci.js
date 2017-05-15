@@ -330,7 +330,7 @@ function displayLocusInfo(data) {
 
 		$.each(im, function(index, rec) {
 			
-			imHtml = '<div class="col-lg-3"><a title="' + rec.Image_file_name + '" href="JZ_IMG_FULL\\' + rec.Image_file_name + '" data-title="' + rec.Image_file_name + '" data-lightbox="finds-lightbox"> <img src="JZ_IMG_TN\\' + rec.Image_file_name + '" width="300px" class="img-thumbnail"></a></div>';
+			imHtml = '<div class="col-lg-2"><a title="' + rec.Image_file_name + '" href="JZ_IMG_FULL\\' + rec.Image_file_name + '" data-title="' + rec.Image_file_name + '" data-lightbox="finds-lightbox"> <img src="JZ_IMG_TN\\' + rec.Image_file_name + '" width="300px" class="img-thumbnail"></a></div>';
 			$('#images_place').append(imHtml);				
 		});
 	}

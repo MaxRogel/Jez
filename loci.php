@@ -77,14 +77,9 @@ body {
 	background-image: none;
 }
 
-.form-horizontal {
-	margin: 10px 10px;
-}
 
-.table {
-	margin-left: 10px;
-	margin-right: 10px;
-}
+
+
 
 .find-tables th {
 	padding: 1px !important;
@@ -123,7 +118,7 @@ body {
 
 
 
-
+<div class="wrapper container-fluid"><!-- need this to get rid of horizontal scroll bar -->
 
 	<nav class="navbar navbar-pills navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
@@ -396,8 +391,9 @@ body {
 	<br>
 
 
-	<div class="container">
+	<div class="container-fluid">
 		<div id="images_place" class="d-inline-flex" ></div>
 	</div>
+</div>	
 </body>
 </html>
