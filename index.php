@@ -153,7 +153,7 @@ body {
 	
 	    <div class="row main">
 	       <div class="form-header">
-	          <h1 class="text-center ">Please login to access DB</h1>
+	          <h1 class="text-center ">Jezreel DB. Please login</h1>
 	        </div>
 	    <div class="main-content">
 				

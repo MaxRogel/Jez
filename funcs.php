@@ -285,7 +285,7 @@ function GetLocusInfo($nloc){
 	$imCnt = $stmt->fetchColumn();	
 
 	if ($imCnt > 0) {
-		$stmt = $conn -> prepare("SELECT * FROM images WHERE Locus_ID = :loc ORDER BY Image_no");
+		$stmt = $conn -> prepare("SELECT * FROM images WHERE Locus_ID = :loc ORDER BY Of_entity_type, Find_no, Image_no");
 		$stmt->execute([':loc' => $nloc]);
 		$im = $stmt->fetchAll(PDO::FETCH_ASSOC);			
 	} 	
