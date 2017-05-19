@@ -1,21 +1,57 @@
-SELECT vAreas.Area_ID, vAreas.YYYY, vAreas.AreaName, Loci.Locus_ID, Loci.Locus_no, Loci.Square, Loci.Date_opened, Loci.Date_closed, Loci.Open_Level, Loci.Close_Level, Loci.Locus_Above, Loci.Locus_Below, Loci.Locus_CoExisting, Loci.Description, Loci.Deposit_description, Loci.Registration_notes, Loci.Clean
-FROM vAreas INNER JOIN Loci ON vAreas.Area_ID = Loci.Area_ID
-ORDER BY vAreas.YYYY, vAreas.AreaName, Loci.Locus_no;
+
+DROP TABLE tbl_lu_arch_periods;
+DROP TABLE tbl_lu_quantity;
+DROP TABLE tbl_lu_find_categories;
+DROP TABLE tblwall;
+DROP TABLE tblalid;
+
+
+RENAME TABLE tblareas TO areas;
+RENAME TABLE tblloci TO loci;
+RENAME TABLE tblpt TO pt;
+RENAME TABLE tblar TO ar;
+RENAME TABLE tbllb TO lb;
+RENAME TABLE tblfl TO fl;
+RENAME TABLE tblgs TO gs;
+RENAME TABLE tblim TO images;
+RENAME TABLE tblusers TO users;
+RENAME TABLE tbl_lu_find_categories TO lu_find_categories;
+
+ALTER TABLE `areas` ENGINE=InnoDB;
+ALTER TABLE `loci` ENGINE=InnoDB;
+ALTER TABLE `pt` ENGINE=InnoDB;
+ALTER TABLE `ar` ENGINE=InnoDB;
+ALTER TABLE `lb` ENGINE=InnoDB;
+ALTER TABLE `fl` ENGINE=InnoDB;
+ALTER TABLE `gs` ENGINE=InnoDB;
+ALTER TABLE `images` ENGINE=InnoDB;
+ALTER TABLE `users` ENGINE=InnoDB;
+ALTER TABLE `lu_find_categories` ENGINE=InnoDB;
+
+CREATE VIEW v_areas AS
+SELECT Area_ID, YYYY, Area AS AreaName, Description, Staff
+FROM areas
+ORDER BY YYYY, Area;
 
 
 CREATE VIEW v_loci AS
-SELECT vAreas.Area_ID, vAreas.YYYY, vAreas.AreaName, Loci.Locus_ID, Loci.Locus_no, Loci.Square, Loci.Date_opened, Loci.Date_closed, Loci.Open_Level, Loci.Close_Level, Loci.Locus_Above, Loci.Locus_Below, Loci.Loci_Coexisting, Loci.Description, Loci.Deposit_description, Loci.Registration_notes, Loci.Clean
-FROM vAreas INNER JOIN Loci ON vAreas.Area_ID = Loci.Area_ID
-ORDER BY vAreas.YYYY, vAreas.AreaName, Loci.Locus_no;
+SELECT areas.Area_ID, areas.YYYY, areas.Area AS AreaName, Loci.Locus_ID, Loci.Locus_no, Loci.Square, Loci.Date_opened, Loci.Date_closed, Loci.Open_Level, Loci.Close_Level, Loci.Locus_Above, Loci.Locus_Below, Loci.Locus_Coexisting, Loci.Description, Loci.Deposit_description, Loci.Registration_notes, Loci.Clean
+FROM areas INNER JOIN Loci ON areas.Area_ID = Loci.Area_ID
+ORDER BY areas.YYYY, areas.Area, Loci.Locus_no;
 
-
-
-CREATE VIEW v_areas AS
-SELECT Area_ID, YYYY, Area AS AreaName, Description, Staff FROM areas ORDER BY YYYY, AreaName ASC
 
 
 
 CREATE VIEW v_lb AS
 SELECT lb.Locus_ID AS Locus_ID, lb.LB_no, lb.Related_PT_no, lb.Square, lb.LB_date, lb.Quantity, lb.Description, lb.Notes, lu_find_categories.Category_Name
-FROM lb INNER JOIN lu_find_categories ON lb.Category_ID = lu_find_categories.Category_ID 
+FROM lb INNER JOIN lu_find_categories ON lb.Category = lu_find_categories.Category_ID 
 ORDER BY lb.LB_no;
+
+
+
+CREATE VIEW v_ar AS
+SELECT ar.AR_ID, ar.Locus_ID AS Locus_ID, ar.AR_no, ar.Related_PT_no, ar.Date, ar.Level, ar.Description, ar.Notes, lu_find_categories.Category_Name
+FROM ar INNER JOIN lu_find_categories ON ar.Category = lu_find_categories.Category_ID 
+ORDER BY ar.AR_no;
+
+

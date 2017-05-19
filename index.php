@@ -28,7 +28,7 @@ if (isset($_POST['username'])) {
 		if($c == 0) {
 				$message = 'No such user. Please try again'; 
 		} else {
-			$r = $conn -> prepare("SELECT user_id, name, pw, priv FROM users WHERE name = :user AND pw = :pw" );
+			$r = $conn -> prepare("SELECT user_id, name, pw FROM users WHERE name = :user AND pw = :pw" );
 			$r->execute(array(':user' => $_REQUEST['username'], ':pw' => $_REQUEST['password']));		
 			$c = $r->rowCount();
 			if($c == 1) {
@@ -36,7 +36,7 @@ if (isset($_POST['username'])) {
 				
 				$_SESSION['user_id'] = $res['user_id'];
 				$_SESSION['name'] = $res['name'];				
-				$_SESSION['priv'] = $res['priv'];	
+	
 				//echo "<h3> PHP List All Session Variables</h3>";
 			    //foreach ($_SESSION as $key=>$val)
 				//echo $key." ".$val."<br/>";

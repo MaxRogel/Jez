@@ -11,7 +11,7 @@ require_once 'config.php';
 $conn = new PDO ( "mysql:host=$servername;dbname=$dbname", $con_name, $con_pw );
 $conn->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-$r = $conn->prepare ( "SELECT * FROM vareas ORDER BY YYYY, AreaName" );
+$r = $conn->prepare ( "SELECT * FROM v_areas ORDER BY YYYY, AreaName" );
 $areas = $r->fetch ( PDO::FETCH_ASSOC );
 $r->execute ();
 $c = $r->rowCount ();
@@ -57,16 +57,14 @@ body {
 }
 
 body {
-	background-color: LightSkyBlue;
-	/*	
-	overflow-x: hidden;
-
-    background: url("images/DSCF1356.JPG")no-repeat center center fixed;
+	/*background-color: LightSkyBlue; */
+		
+    background: url("images/DSCF1357nf.JPG")no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-  */
+ 
 }
 
 .navbar-nav {
