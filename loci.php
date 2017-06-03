@@ -26,17 +26,14 @@ $areas = $r->fetchAll ();
 <head>
 <TITLE>Jezreel DB</TITLE>
 
-<title>Bootstrap Example</title>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="./css/lightbox.css" rel="stylesheet">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="./js/lightbox.js"></script>
 
 
@@ -125,21 +122,45 @@ body {
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><p class="navbar-text">Jezreel DB</p></li>
+					<!--  <li><p class="navbar-text">Jezreel DB</p></li>-->
+
+
+						<li>
+						<form class="navbar-form navbar-left">
+								<div class="form-group">
+									<input type="text" id="current_locus_text" class="form-control">
+								</div>
+
+							</form></li>
+
+
 					
 					
-					<li><form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" id="current_locus_text" class="form-control">
-        </div>
-        
-      </form></li>
+					<li><a href="#" class="arrow-nav" id="bFirst">
+					
+					<span class="glyphicon glyphicon-step-backward"></span>
+					</a></li>
+					
+					<li><a href="#" class="arrow-nav" id="bPrev">
+					
+					<span class="glyphicon glyphicon glyphicon-triangle-left"></span>
+					</a></li>					
+					
+					<li><a href="#" class="arrow-nav" id="bNext">
+					
+					<span class="glyphicon glyphicon glyphicon-triangle-right"></span>
+					</a></li>					
+					
+
+					<li><a href="#" class="arrow-nav" id="bLast">
+					
+					<span class="glyphicon glyphicon glyphicon glyphicon-step-forward"></span>
+					</a></li>		
+					<!--  <li><a href="#" class="arrow-nav" id="bLast">Last</a></li>-->
 					
 					
-					<li><a href="#" class="arrow-nav" id="bFirst">First</a></li>
-					<li><a href="#" class="arrow-nav" id="bPrev">Prev</a></li>
-					<li><a href="#" class="arrow-nav" id="bNext">Next</a></li>
-					<li><a href="#" class="arrow-nav" id="bLast">Last</a></li>
+					
+					
 					<!--  <li><p class="navbar-text">| Area:</p></li>-->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						id="areas_dropdown_toggle" data-toggle="dropdown" role="button"

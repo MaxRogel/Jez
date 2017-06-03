@@ -35,23 +35,21 @@ ORDER BY YYYY, Area;
 
 
 CREATE VIEW v_loci AS
-SELECT areas.Area_ID, areas.YYYY, areas.Area AS AreaName, Loci.Locus_ID, Loci.Locus_no, Loci.Square, Loci.Date_opened, Loci.Date_closed, Loci.Open_Level, Loci.Close_Level, Loci.Locus_Above, Loci.Locus_Below, Loci.Locus_Coexisting, Loci.Description, Loci.Deposit_description, Loci.Registration_notes, Loci.Clean
-FROM areas INNER JOIN Loci ON areas.Area_ID = Loci.Area_ID
-ORDER BY areas.YYYY, areas.Area, Loci.Locus_no;
-
-
+SELECT areas.Area_ID, areas.YYYY, areas.Area AS AreaName, loci.Locus_ID, loci.Locus_no, loci.Square, loci.Date_opened, loci.Date_closed, loci.Open_Level, loci.Close_Level, loci.Locus_Above, loci.Locus_Below, loci.Locus_Coexisting, loci.Description, loci.Deposit_description, loci.Registration_notes, loci.Clean
+FROM areas INNER JOIN loci ON areas.Area_ID = loci.Area_ID
+ORDER BY areas.YYYY, areas.Area, loci.Locus_no;
 
 
 CREATE VIEW v_lb AS
 SELECT lb.Locus_ID AS Locus_ID, lb.LB_no, lb.Related_PT_no, lb.Square, lb.LB_date, lb.Quantity, lb.Description, lb.Notes, lu_find_categories.Category_Name
-FROM lb INNER JOIN lu_find_categories ON lb.Category = lu_find_categories.Category_ID 
+FROM lb INNER JOIN lu_find_categories ON lb.Category_ID = lu_find_categories.Category_ID 
 ORDER BY lb.LB_no;
 
 
 
 CREATE VIEW v_ar AS
 SELECT ar.AR_ID, ar.Locus_ID AS Locus_ID, ar.AR_no, ar.Related_PT_no, ar.Date, ar.Level, ar.Description, ar.Notes, lu_find_categories.Category_Name
-FROM ar INNER JOIN lu_find_categories ON ar.Category = lu_find_categories.Category_ID 
+FROM ar INNER JOIN lu_find_categories ON ar.Category_ID = lu_find_categories.Category_ID 
 ORDER BY ar.AR_no;
 
-
+ALTER TABLE pt ADD FOREIGN KEY (locus_ID) REFERENCES loci (locus_ID) ON DELETE SET NULL ON UPDATE CASCADE

@@ -20,7 +20,7 @@ if (isset($_POST['username'])) {
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
 		$r = $conn -> prepare("SELECT COUNT(*) FROM users WHERE name = :user" );
-		$r->execute([':user' => $_REQUEST['username']]);
+		$r->execute(array(':user' => $_REQUEST['username']));
 		
 		$c = $r->fetchColumn();
 
@@ -48,7 +48,7 @@ if (isset($_POST['username'])) {
 	}
 	catch(PDOException $e) {
 		echo "Error: " . $e->getMessage();
-		$message = 'Server connection problem. Try later';
+		$message = 'Server connection problem. Try later' . $e->getMessage();
 	}		
 }
 
@@ -57,14 +57,21 @@ if (isset($_POST['username'])) {
 
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Jezreel DB</title>
 
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="./css/lightbox.css" rel="stylesheet">
+
+<title>Jezreel DB</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./js/lightbox.js"></script>
+
+    <!-- Bootstrap 
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -182,10 +189,7 @@ body {
 
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed 
-    <script src="bootstrap/js/bootstrap.min.js"></script>-->
+
   </body>
 </html>
 

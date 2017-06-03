@@ -17,7 +17,7 @@ if(empty($_POST["YYYY"]) ||empty($_POST["area_name"]) )
 else {
 	
 	$stmt = $conn -> prepare("SELECT Locus_ID, Locus_no FROM v_loci WHERE YYYY = :YYYY AND areaName= :area_name ORDER BY Locus_no");
-	$stmt->execute([':YYYY' => $_REQUEST['YYYY'], ':area_name' => $_REQUEST['area_name']]);
+	$stmt->execute(array(':YYYY' => $_REQUEST['YYYY'], ':area_name' => $_REQUEST['area_name']));
 	//$c = $stmt->rowCount();
 	
 	//if($c > 0) {

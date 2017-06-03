@@ -55,7 +55,7 @@ $(document).ready(function(){
 		data: 'loc_id=' + loc_id + '&req='+ req + '&loc_no=' + loc_no + '&yyyy='+ yyyy + '&area_name='+ area_name,
 		error: function(xhr, error)
 		{
-			alert("ajax error");
+			alert("ajax error in populating locus info");
 		},
 		success: function(data){	
 			displayLocusInfo(data);
@@ -114,6 +114,10 @@ function getLocusListBS(val) {
 	type: "POST",
 	url: "get_loci_list.php",
 	data:'YYYY=' + YYYY + '&area_name=' + area_name,
+	error: function(xhr, error)
+	{
+		alert("ajax error in populating loci");
+	},
 	success: function(data){
 
 		$('.loci_dropdown').children().remove(); 
