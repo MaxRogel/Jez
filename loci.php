@@ -161,7 +161,7 @@ body {
 						</ul>
 					</li>
 					
-					<li><a href="#" class="arrow-nav" id="bGo">GO!</a></li>
+					<!-- <li><a href="#" class="arrow-nav" id="bGo">GO!</a></li> -->
 
 					<!--  toggle options -->
 					<li>

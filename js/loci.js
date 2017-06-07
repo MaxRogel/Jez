@@ -22,43 +22,17 @@ $(document).ready(function(){
 		
 		//populate loci dropdown
 		getLocusListBS($(this).text());
-		
-
-
-		
-
     });
 	 
-	 //loci selection will switch to selected locus
-	 
-	   
 
- 
 	//attach click handler to loci navigation buttons
 	$(".arrow-nav").click(function(){
-		var area, area_name, yyyy, loc_id, loc_no, area_id;
+		var area = '', area_name = '', yyyy = '', loc_id, loc_no, area_id;
 		var req = $(this).attr('id');
 		
 		
-		//alert("loc is "+ $("#loci-list").val()+ " req is "+ $(this).attr('id'));
-		if(req == "bGo") {
-			if(loc_id == ""){
-				return;
-			}else {
-				//on GO - send loc_no and area_id
-				loc_no = parseInt($("#loci_dropdown_toggle").text());
-				area = $("#areas_dropdown_toggle").text()
-				yyyy = area.split('.')[0];
-				area_name = area.split('.')[1];	
-				//alert("GO loc: " + loc_no + " yyyy: " + yyyy + " area_name: " + area_name);
-			}
-		} else 
-		{
-			//if not GO then we used the global gLocId
 			loc_id = gLocId;
-		}
-		//alert("before ajax req: " + req + " loc_id: " + loc_id + " loc no: "+ loc_no + " yyyy: " + yyyy + " area_name: " + area_name);
-		
+
 		$.ajax({
 		type: "POST",
 		dataType: "json",
@@ -75,6 +49,9 @@ $(document).ready(function(){
 		});
 	});
 
+
+	
+	
 	//attach display selection checkboxes handler
 	$('input[type=checkbox]').change(function(){
 		var id, checked;
@@ -138,13 +115,41 @@ function getLocusListBS(val) {
 		});				
 	}	
 	});
-
 	
 	//attach click handler
 	$(document).on('click', '.loci_dropdown li a', function(){
-		//alert("loci click");		                  
+	     
+		//display new loci number in dropdown
 		$("#loci_dropdown_toggle").html($(this).text () +' <span class="caret"></span>');	
-		 $('#bGo').trigger('click');
+		 
+		var area, area_name, yyyy, loc_id, loc_no, area_id;
+		var req = 'bGo';
+		
+		if(loc_id == ""){
+			return;
+		}else {
+			//parse relevant info to send with ajax
+			loc_no = parseInt($("#loci_dropdown_toggle").text());
+			area = $("#areas_dropdown_toggle").text()
+			yyyy = area.split('.')[0];
+			area_name = area.split('.')[1];	
+			//alert("GO loc: " + loc_no + " yyyy: " + yyyy + " area_name: " + area_name);
+		}
+
+		$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "get_locus_info_bs.php",
+		data: 'loc_id=' + loc_id + '&req='+ req + '&loc_no=' + loc_no + '&yyyy='+ yyyy + '&area_name='+ area_name,
+		error: function(xhr, error)
+		{
+			alert("ajax error in populating locus info");
+		},
+		success: function(data)
+		{	
+			displayLocusInfo(data);
+		}		
+		});		
 	});
 	
 	
