@@ -113,115 +113,12 @@ function get_new_locus_id($loc_id, $req, $loc_no, $yyyy, $area_name){
 			else
 			{
 				$nloc = 48;
-			}
-			
+			}		
 	}
 	
 	return $nloc;
 }
 
-/*
-function RequestedLocus($loc, $req, $loc_no, $area_id){
-	
-	global $servername, $dbname, $con_name, $con_pw;
-	
-	
-	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $con_name, $con_pw);
-	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
-	switch ($req) {
-		case "btnFirst":
-			$stmt = $conn -> prepare("SELECT Locus_ID FROM v_loci ORDER BY YYYY, AreaName, Locus_no ASC LIMIT 1");
-			$stmt->execute();
-			$nloc = $stmt->fetchColumn();
-			break;
-			
-		case "btnLast":
-			$stmt = $conn -> prepare("SELECT Locus_ID FROM v_loci ORDER BY YYYY DESC, AreaName DESC, Locus_no DESC LIMIT 1");
-			$stmt->execute();
-			$nloc = $stmt->fetchColumn();
-			break;
-			
-		case "btnNext":
-			
-			$stmt = $conn -> prepare("SELECT YYYY, AreaName, Locus_no FROM v_loci WHERE Locus_ID = :loc");
-			$stmt->execute(array(':loc' => $loc));
-			$res = $stmt->fetch();
-			$y  = $res['YYYY'];
-			$an = $res['AreaName'];
-			$ln = $res['Locus_no'];
-			
-			$stmt = $conn -> prepare("SELECT Locus_ID FROM v_loci WHERE YYYY = :y AND AreaName = :an AND Locus_no > :ln ORDER BY Locus_no ASC LIMIT 1");
-			$stmt->execute([':y' => $y, ':an' => $an, ':ln' => $ln]);
-			if ($stmt->rowCount() > 0) {
-				$nloc = $stmt->fetchColumn();
-				break;
-			}
-			$stmt = $conn -> prepare("SELECT Locus_ID FROM v_loci WHERE YYYY = :y AND AreaName > :an ORDER BY AreaName, Locus_no ASC LIMIT 1");
-			$stmt->execute(array(':y' => $y, ':an' => $an));
-			if ($stmt->rowCount() > 0) {
-				$nloc = $stmt->fetchColumn();
-				break;
-			}
-			$stmt = $conn -> prepare("SELECT Locus_ID FROM v_loci WHERE YYYY > :y ORDER BY YYYY, AreaName, Locus_no ASC LIMIT 1");
-			$stmt->execute(array(':y' => $y));
-			if ($stmt->rowCount() > 0) {
-				$nloc = $stmt->fetchColumn();
-				break;
-			}
-			$nloc = $loc;
-			break;
-			
-		case "btnPrev":
-			//twice - put in func
-			$stmt = $conn -> prepare("SELECT YYYY, AreaName, Locus_no FROM v_loci WHERE Locus_ID = :loc");
-			$stmt->execute(array(':loc' => $loc));
-			$res = $stmt->fetch();
-			$y  = $res['YYYY'];
-			$an = $res['AreaName'];
-			$ln = $res['Locus_no'];
-			
-			$stmt = $conn -> prepare("SELECT Locus_ID FROM v_loci WHERE YYYY = :y AND AreaName = :an AND Locus_no < :ln ORDER BY Locus_no DESC LIMIT 1");
-			$stmt->execute(array(':y' => $y, ':an' => $an, ':ln' => $ln));
-			if ($stmt->rowCount() > 0) {
-				$nloc = $stmt->fetchColumn();
-				break;
-			}
-			$stmt = $conn -> prepare("SELECT Locus_ID FROM v_loci WHERE YYYY = :y AND AreaName < :an ORDER BY AreaName DESC, Locus_no DESC LIMIT 1");
-			$stmt->execute(array(':y' => $y, ':an' => $an));
-			if ($stmt->rowCount() > 0) {
-				$nloc = $stmt->fetchColumn();
-				break;
-			}
-			$stmt = $conn -> prepare("SELECT Locus_ID FROM v_loci WHERE YYYY < :y ORDER BY YYYY DESC, AreaName DESC, Locus_no DESC LIMIT 1");
-			$stmt->execute(array(':y' => $y));
-			if ($stmt->rowCount() > 0) {
-				$nloc = $stmt->fetchColumn();
-				break;
-			}
-			$nloc = $loc;
-			break;
-			
-		case "btnGo":
-			$nloc = $loc;
-			
-			$stmt = $conn -> prepare("SELECT Locus_ID FROM v_loci WHERE Area_ID = :area_id AND Locus_no = :locus_no");
-			$stmt->execute(array(':area_id' => $area_id, ':locus_no' => $loc_no));
-			if ($stmt->rowCount() > 0)
-			{
-				$nloc = $stmt->fetchColumn();
-				break;
-			}
-			else
-			{
-				$nloc = 48;
-			}
-			
-	}
-	
-	return $nloc;
-}
-*/
 
 function GetLocusInfo($nloc){
 	

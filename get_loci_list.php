@@ -26,3 +26,5 @@ else {
 	//}
 	echo(json_encode($loci_list));
 }
+
+?>

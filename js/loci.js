@@ -3,9 +3,13 @@ var lc;
 var gLocId;
 
 
+
+
+
+
 $(document).ready(function(){
 
-	//dropdown area selection. This list was populated in loci.php 	
+	//area dropdown selection. This list was populated in loci.php. On click will populate loci dropdown 	
 
 	 $(".area_dropdown li a").click(function(){	 
 		 	
@@ -18,9 +22,16 @@ $(document).ready(function(){
 		
 		//populate loci dropdown
 		getLocusListBS($(this).text());
-    
-    });
+		
 
+
+		
+
+    });
+	 
+	 //loci selection will switch to selected locus
+	 
+	   
 
  
 	//attach click handler to loci navigation buttons
@@ -132,7 +143,8 @@ function getLocusListBS(val) {
 	//attach click handler
 	$(document).on('click', '.loci_dropdown li a', function(){
 		//alert("loci click");		                  
-		$("#loci_dropdown_toggle").html($(this).text () +' <span class="caret"></span>');		    
+		$("#loci_dropdown_toggle").html($(this).text () +' <span class="caret"></span>');	
+		 $('#bGo').trigger('click');
 	});
 	
 	
@@ -335,7 +347,7 @@ function displayLocusInfo(data) {
 		$.each(im, function(index, rec) {
 			
 			//imHtml = '<div class="col-lg-2"><a title="' + rec.Image_file_name + '" href="JZ_IMG_FULL\\' + rec.Image_file_name + '" data-title="' + rec.Image_file_name + '" data-lightbox="finds-lightbox"> <img src="JZ_IMG_TN\\' + rec.Image_file_name + '" width="300px" class="img-thumbnail"></a></div>';
-			imHtml = '<div class="col-lg-2"><a title="' + rec.Image_file_name + '" href="JZ_IMG_FULL\\' + rec.Image_file_name + '.' + rec.File_type  +'" data-title="' + rec.Image_file_name + '" data-lightbox="finds-lightbox"> <img src="JZ_IMG_TN\\' + rec.Image_file_name + '.' + rec.File_type  + '" width="300px" class="img-thumbnail"></a></div>';
+			imHtml = '<div class="col-lg-2"><a title="' + rec.Image_file_name + '" href="JZ_IMG_500K\\' + rec.Image_file_name + '.' + rec.File_type  +'" data-title="' + rec.Image_file_name + '" data-lightbox="finds-lightbox"> <img src="JZ_IMG_TN\\' + rec.Image_file_name + '.' + rec.File_type  + '" width="300px" class="img-thumbnail"></a></div>';
 			$('#images_place').append(imHtml);				
 		});
 	}

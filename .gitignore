@@ -1,7 +1,8 @@
 .buildpath
 .project
 .settings/
-JZ_IMG_FULL/
+JZ_IMG_ORIG/
+JZ_IMG_500K/
 JZ_IMG_TN/
 bootstrap/
 images/

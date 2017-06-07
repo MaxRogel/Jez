@@ -36,32 +36,26 @@ $areas = $r->fetchAll ();
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="./js/lightbox.js"></script>
 
-
-
-
 <script src="./js/loci.js"></script>
 
 <script>
 lightbox.option({
       'maxHeight': 800,
-
     })  
-    </script>
+</script>
 
 <style>
-body {
-	height: 100%;
-}
+
 
 body {
 	/*background-color: LightSkyBlue; */
-		
+	height: 100%;
+
     background: url("images/DSCF1357nf.JPG")no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
- 
 }
 
 .navbar-nav {
@@ -71,10 +65,6 @@ body {
 	float: none;
 	background-image: none;
 }
-
-
-
-
 
 .find-tables th {
 	padding: 1px !important;
@@ -99,17 +89,9 @@ body {
 }
 </style>
 
-<!-- <link rel="stylesheet" type="text/css" href="css/jez.css" /> -->
-
-
 </head>
 
 <body>
-
-
-
-
-
 
 
 
@@ -122,7 +104,7 @@ body {
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<!--  <li><p class="navbar-text">Jezreel DB</p></li>-->
+					<!--  <li><p class="navbar-text">Jezreel DB</p></li> Save space and omit this-->
 
 
 						<li>
@@ -135,33 +117,30 @@ body {
 
 
 					
+					<!--  Navigation arrows -->
 					
-					<li><a href="#" class="arrow-nav" id="bFirst">
-					
+					<li><a href="#" class="arrow-nav" id="bFirst">					
 					<span class="glyphicon glyphicon-step-backward"></span>
 					</a></li>
 					
-					<li><a href="#" class="arrow-nav" id="bPrev">
-					
+					<li><a href="#" class="arrow-nav" id="bPrev">					
 					<span class="glyphicon glyphicon glyphicon-triangle-left"></span>
 					</a></li>					
 					
-					<li><a href="#" class="arrow-nav" id="bNext">
-					
+					<li><a href="#" class="arrow-nav" id="bNext">					
 					<span class="glyphicon glyphicon glyphicon-triangle-right"></span>
 					</a></li>					
 					
-
-					<li><a href="#" class="arrow-nav" id="bLast">
-					
+					<li><a href="#" class="arrow-nav" id="bLast">					
 					<span class="glyphicon glyphicon glyphicon glyphicon-step-forward"></span>
 					</a></li>		
-					<!--  <li><a href="#" class="arrow-nav" id="bLast">Last</a></li>-->
+
 					
 					
 					
 					
-					<!--  <li><p class="navbar-text">| Area:</p></li>-->
+					<!--  area dropdown -->
+					
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						id="areas_dropdown_toggle" data-toggle="dropdown" role="button"
 						aria-haspopup="true" aria-expanded="false">Area<span class="caret"></span></a>
@@ -170,15 +149,21 @@ body {
 							<li><a href="#"><?php echo $a["YYYY"] . '.' . $a["AreaName"]; ?></a></li>
 						<?php } ?>			
 						</ul></li>
-
+					
+					<!--  loci dropdown -->
+					
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						id="loci_dropdown_toggle" data-toggle="dropdown" role="button"
 						aria-haspopup="true" aria-expanded="false">Locus<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu loci_dropdown" id="loci_list">
-						</ul></li>
+							<!-- jQ -->
+						</ul>
+					</li>
+					
 					<li><a href="#" class="arrow-nav" id="bGo">GO!</a></li>
 
+					<!--  toggle options -->
 					<li>
 
 						<form class="navbar-form navbar-left">
@@ -194,12 +179,16 @@ body {
 								
 								<label class="checkbox-inline"> <input type="checkbox" id="show_images" value="">Images
 								</label>
+								<!-- <label class="navbar-text">Images</label> -->
 							</div>
+							
+							
+							
 						</form>
-					</li>
-				</ul>
-
-
+					</li>		
+					
+					
+					</ul>
 
 
 
