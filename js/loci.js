@@ -44,6 +44,7 @@ $(document).ready(function(){
 		},
 		success: function(data){	
 			displayLocusInfo(data);
+			$('body').show();
 		}
 		
 		});
@@ -54,11 +55,17 @@ $(document).ready(function(){
 	
 	//attach display selection checkboxes handler
 	$('input[type=checkbox]').change(function(){
-		var id, checked;
+		var my_checkbox_id, id, checked;
 
+		my_checkbox_id = $(this).attr('id');
+		
+		//alert("Checkbox " + my_checkbox_id + " was clicked");
+		
 		$(':checkbox').each(function() {		    	    
 			id = $(this).attr('id');
 			checked = this.checked ? true : false;
+			
+			//alert("Checked " + id + " is " + checked);
 			
 			switch(id) {
 		    case 'show_locus':
@@ -72,9 +79,37 @@ $(document).ready(function(){
 		    case 'show_finds':
 		        checked ? $("#non_pt_tables").show() : $("#non_pt_tables").hide();
 		        break;
-		    case 'show_images':
-		        checked ? $("#images_place").show() : $("#images_place").hide();
+		        
+
+		    case 'show_images_locus':
+		        checked ? $(".Image_type_2").show() : $(".Image_type_2").hide();
+		        break;	    
+		        
+		    case 'show_images_pt':
+
+		        checked ? $(".Image_type_3").show() : $(".Image_type_3").hide();
+		        break;		        
+		    
+		        
+		    case 'show_images_ar':
+		    	//alert("Checked ar");
+		        checked ? $(".Image_type_4").show() : $(".Image_type_4").hide();
+		        break;    
+		        
+		    case 'show_images_lb':
+		        checked ? $(".Image_type_5").show() : $(".Image_type_5").hide();
 		        break;
+		        
+		    case 'show_images_fl':
+		        checked ? $(".Image_type_5").show() : $(".Image_type_5").hide();
+		        break;		        
+		        
+		    case 'show_images_gs':
+		        checked ? $(".Image_type_6").show() : $(".Image_type_6").hide();
+		        break;
+		        
+
+		     
 			}   
 		   //alert("CHECKED id: " + id);     
 		});
@@ -83,10 +118,15 @@ $(document).ready(function(){
 $("#show_locus").prop( "checked", true );	
 $("#show_pt").prop( "checked", true );	
 $("#show_finds").prop( "checked", true );	
-$("#show_images").prop( "checked", true );	 
- 
- 
- $('#bFirst').trigger('click');
+$("#show_images_locus").prop( "checked", true );	 
+
+$("#show_images_pt").prop( "checked", true );	  
+$("#show_images_ar").prop( "checked", true );	   
+$("#show_images_lb").prop( "checked", true );	  
+$("#show_images_fl").prop( "checked", true );
+$("#show_images_gs").prop( "checked", true );
+
+$('#bFirst').trigger('click');
  
  });
 
@@ -351,8 +391,18 @@ function displayLocusInfo(data) {
 
 		$.each(im, function(index, rec) {
 			
-			//imHtml = '<div class="col-lg-2"><a title="' + rec.Image_file_name + '" href="JZ_IMG_FULL\\' + rec.Image_file_name + '" data-title="' + rec.Image_file_name + '" data-lightbox="finds-lightbox"> <img src="JZ_IMG_TN\\' + rec.Image_file_name + '" width="300px" class="img-thumbnail"></a></div>';
-			imHtml = '<div class="col-lg-2"><a title="' + rec.Image_file_name + '" href="JZ_IMG_500K\\' + rec.Image_file_name + '.' + rec.File_type  +'" data-title="' + rec.Image_file_name + '" data-lightbox="finds-lightbox"> <img src="JZ_IMG_TN\\' + rec.Image_file_name + '.' + rec.File_type  + '" width="300px" class="img-thumbnail"></a></div>';
+			
+		//imHtml = '<div class="col-lg-2"><a title="' + rec.Image_file_name + '" href="JZ_IMG_500K\\' + rec.Image_file_name + '.' 
+		//		+ rec.File_type  + 	'" data-title="' + rec.Image_file_name + '" data-lightbox="finds-lightbox"> <img src="JZ_IMG_TN\\' 
+		//		+ rec.Image_file_name + '.' + rec.File_type 	+ '" width="300px" class="img-thumbnail Image_type_' + parseInt(rec.Of_entity_type) + '"></a></div>';
+											
+			
+			
+		imHtml = '<div class="col-lg-2 Image_type_' + parseInt(rec.Of_entity_type) + '"><a title="' + rec.Image_file_name + '" href="JZ_IMG_500K\\' + rec.Image_file_name + '.' 
+				+ rec.File_type  + 	'" data-title="' + rec.Image_file_name + '" data-lightbox="finds-lightbox"> <img src="JZ_IMG_TN\\' 
+				+ rec.Image_file_name + '.' + rec.File_type 	+ '" width="300px" class="img-thumbnail "></a></div>';
+								
+			
 			$('#images_place').append(imHtml);				
 		});
 	}

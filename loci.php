@@ -49,6 +49,8 @@ lightbox.option({
 
 body {
 	/*background-color: LightSkyBlue; */
+	
+	display:none;	
 	height: 100%;
 
     background: url("images/DSCF1357nf.JPG")no-repeat center center fixed;
@@ -87,6 +89,7 @@ body {
 	background-color: rgba(229, 76, 16, .1);
 	background-color: #dae5f4;
 }
+
 </style>
 
 </head>
@@ -177,8 +180,20 @@ body {
 								<label class="checkbox-inline"> <input type="checkbox"  id="show_finds" value="">Finds
 								</label> 
 								
-								<label class="checkbox-inline"> <input type="checkbox" id="show_images" value="">Images
+								<b>. Images:</b>
+								<label class="checkbox-inline"> <input type="checkbox" id="show_images_locus" value="">Locus
 								</label>
+								<label class="checkbox-inline"> <input type="checkbox" id="show_images_pt" value="">pt
+								</label>
+								<label class="checkbox-inline"> <input type="checkbox" id="show_images_ar" value="">ar
+								</label>
+								<label class="checkbox-inline"> <input type="checkbox" id="show_images_lb" value="">lb
+								</label>
+								<label class="checkbox-inline"> <input type="checkbox" id="show_images_fl" value="">fl
+								</label>
+								<label class="checkbox-inline"> <input type="checkbox" id="show_images_gs" value="">gs
+								</label>
+								
 								<!-- <label class="navbar-text">Images</label> -->
 							</div>
 							
